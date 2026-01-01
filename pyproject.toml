@@ -63,6 +63,8 @@ select = [
 ignore = [
     "E501",  # line too long (handled by formatter)
     "E402",  # module level import not at top of file
+    "F401",  # imported but unused (example scripts may have extras)
+    "F541",  # f-string without placeholders
 ]
 
 [tool.pytest.ini_options]
