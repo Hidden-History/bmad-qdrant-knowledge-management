@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-01-01
+
+### Added
+
+- GitHub Actions CI workflow with Python 3.9-3.12 testing
+- Docker Compose configuration for one-command Qdrant setup
+- Python packaging with `pyproject.toml` and `requirements.txt`
+- Issue templates (bug report, feature request)
+- Pull request template
+- `CODE_OF_CONDUCT.md` - Contributor Covenant
+- `SECURITY.md` - Security policy and best practices
+- `CHANGELOG.md` - Version history
+- Demo knowledge entries with example metadata
+- Social preview image for GitHub sharing
+- CI badge in README
+
+### Changed
+
+- Updated installation docs to use `docker compose up -d`
+- Updated prerequisites to Python 3.9+
+- Updated QUICKSTART with Docker Compose as recommended option
+
+### Fixed
+
+- Corrected git clone URL in README
+
 ## [1.0.0] - 2026-01-01
 
 ### Added
@@ -40,4 +66,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - No credentials stored in repository
 - Environment variable configuration
 
+[1.1.0]: https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases/tag/v1.0.0
