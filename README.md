@@ -1,10 +1,19 @@
-# Qdrant MCP Knowledge Management for BMAD
+<p align="center">
+  <img src="assets/banner.svg" alt="Qdrant Knowledge Management for BMAD" width="100%">
+</p>
 
-> Institutional memory system for AI-assisted development using Qdrant vector database
+<h1 align="center">Qdrant MCP Knowledge Management for BMAD</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![BMAD Compatible](https://img.shields.io/badge/BMAD-v6+-blue.svg)](https://github.com/bmad-code-org/BMAD-METHOD)
-[![Qdrant](https://img.shields.io/badge/Qdrant-MCP-green.svg)](https://github.com/modelcontextprotocol/servers)
+<p align="center">
+  <strong>Institutional memory system for AI-assisted development using Qdrant vector database</strong>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/bmad-code-org/BMAD-METHOD"><img src="https://img.shields.io/badge/BMAD-v6+-blue.svg" alt="BMAD Compatible"></a>
+  <a href="https://github.com/qdrant/mcp-server-qdrant"><img src="https://img.shields.io/badge/Qdrant-MCP-dc4a33.svg" alt="Qdrant MCP"></a>
+  <a href="https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases"><img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="Version"></a>
+</p>
 
 ## TL;DR
 
