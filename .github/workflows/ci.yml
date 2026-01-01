@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Run linting
+        run: |
+          pip install ruff
+          ruff check .
+
+      - name: Run tests
+        run: |
+          cd validation
+          pytest -v --tb=short
+
+  validate-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate JSON schemas
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          from jsonschema import Draft7Validator
+
+          schemas_dir = Path('metadata-schemas')
+          for schema_file in schemas_dir.glob('*.json'):
+              print(f'Validating {schema_file.name}...')
+              with open(schema_file) as f:
+                  schema = json.load(f)
+              Draft7Validator.check_schema(schema)
+              print(f'  ✓ {schema_file.name} is valid')
+          print('All schemas valid!')
+          "
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify Docker Compose config
+        run: docker compose config
+
+      - name: Start Qdrant
+        run: |
+          docker compose up -d qdrant
+          sleep 5
+
+      - name: Health check
+        run: |
+          curl -f http://localhost:6333/health || exit 1
+          echo "Qdrant is healthy!"
+
+      - name: Stop services
+        run: docker compose down

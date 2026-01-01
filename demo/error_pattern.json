@@ -1,0 +1,29 @@
+{
+  "information": "Error Pattern: Qdrant connection timeout in Docker environment. Symptom: Connection refused or timeout when connecting to Qdrant from application container. Root cause: Docker networking - application trying to connect to localhost:6333 but Qdrant is in separate container. Solution: 1) Use Docker service name instead of localhost (e.g., 'qdrant' if service named 'qdrant' in docker-compose), 2) Ensure both containers on same Docker network, 3) Use QDRANT_URL=http://qdrant:6333 in environment. Prevention: Always use service names in Docker environments, add health checks to wait for Qdrant readiness, implement connection retry logic with exponential backoff.",
+  "metadata": {
+    "unique_id": "error-qdrant-docker-connection-2026-01-01",
+    "type": "error_pattern",
+    "error_type": "ConnectionError",
+    "component": "qdrant",
+    "environment": "docker",
+    "symptom": "Connection refused or timeout when connecting to Qdrant",
+    "root_cause": "Docker networking - localhost refers to container itself, not host or other containers",
+    "solution": "Use Docker service name (e.g., http://qdrant:6333) instead of localhost",
+    "prevention": [
+      "Always use service names in Docker environments",
+      "Add health checks for service readiness",
+      "Implement connection retry with exponential backoff"
+    ],
+    "code_example": "QDRANT_URL=http://qdrant:6333  # In docker-compose environment",
+    "severity": "medium",
+    "occurrences": 3,
+    "first_seen": "2025-12-15",
+    "last_seen": "2026-01-01",
+    "resolved": true,
+    "related_ids": ["arch-docker-setup-2025-12-01"],
+    "group_id": "demo_project",
+    "importance": "medium",
+    "created_at": "2026-01-01",
+    "updated_at": "2026-01-01"
+  }
+}

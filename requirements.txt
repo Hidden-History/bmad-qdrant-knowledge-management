@@ -1,0 +1,4 @@
+# Core dependencies for BMAD Qdrant Knowledge Management
+qdrant-client>=1.7.0
+python-dotenv>=1.0.0
+jsonschema>=4.20.0

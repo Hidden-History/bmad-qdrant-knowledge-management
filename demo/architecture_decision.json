@@ -1,0 +1,29 @@
+{
+  "information": "Architecture Decision: Use PostgreSQL with pgvector for hybrid search. Decision made to combine traditional SQL queries with vector similarity search in a single database. PostgreSQL chosen over separate Qdrant instance for this use case because: 1) Simpler infrastructure - single database to manage, 2) ACID transactions across both search types, 3) Team already has PostgreSQL expertise, 4) Dataset size under 1M vectors where pgvector performs well. Trade-offs accepted: Less optimized vector search than dedicated Qdrant, limited to cosine/L2/inner product distances. Will revisit if vector count exceeds 5M or search latency becomes critical.",
+  "metadata": {
+    "unique_id": "arch-database-hybrid-search-2026-01-01",
+    "type": "architecture_decision",
+    "component": "database",
+    "decision": "Use PostgreSQL with pgvector extension for hybrid SQL and vector search",
+    "rationale": "Simpler infrastructure, ACID compliance, team expertise, adequate performance for current scale",
+    "alternatives_considered": [
+      "Qdrant dedicated instance",
+      "Pinecone managed service",
+      "Elasticsearch with dense vectors"
+    ],
+    "consequences": [
+      "Single database deployment",
+      "Limited vector search optimization",
+      "Easier backup and recovery"
+    ],
+    "status": "accepted",
+    "decision_date": "2026-01-01",
+    "review_date": "2026-07-01",
+    "stakeholders": ["backend-team", "devops"],
+    "related_ids": ["story-database-setup-2026-01-01"],
+    "group_id": "demo_project",
+    "importance": "high",
+    "created_at": "2026-01-01",
+    "updated_at": "2026-01-01"
+  }
+}

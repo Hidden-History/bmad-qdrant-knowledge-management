@@ -1,0 +1,39 @@
+{
+  "information": "Agent Specification: Document Processor Agent. This agent handles document ingestion, text extraction, and chunking for the knowledge base. Capabilities: 1) PDF text extraction using PyMuPDF, 2) OCR fallback for scanned documents using Tesseract, 3) Intelligent chunking with overlap (512 tokens, 50 token overlap), 4) Metadata extraction (title, author, date from document properties), 5) Language detection for multi-language support. Integration: Receives documents via message queue (RabbitMQ), outputs chunks to embedding pipeline. Dependencies: PyMuPDF, pytesseract, langdetect, tiktoken. Rate limits: 100 documents/hour to prevent resource exhaustion.",
+  "metadata": {
+    "unique_id": "agent-document-processor-2026-01-01",
+    "type": "agent_spec",
+    "agent_name": "Document Processor",
+    "version": "1.0.0",
+    "capabilities": [
+      "PDF text extraction",
+      "OCR for scanned documents",
+      "Intelligent text chunking",
+      "Metadata extraction",
+      "Language detection"
+    ],
+    "dependencies": [
+      "PyMuPDF>=1.23.0",
+      "pytesseract>=0.3.10",
+      "langdetect>=1.0.9",
+      "tiktoken>=0.5.0"
+    ],
+    "integration_points": [
+      "RabbitMQ input queue: document-ingestion",
+      "RabbitMQ output queue: embedding-pipeline",
+      "S3 bucket: raw-documents"
+    ],
+    "configuration": {
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "rate_limit": "100/hour"
+    },
+    "owner": "backend-team",
+    "status": "active",
+    "related_ids": ["arch-document-pipeline-2025-12-15"],
+    "group_id": "demo_project",
+    "importance": "high",
+    "created_at": "2026-01-01",
+    "updated_at": "2026-01-01"
+  }
+}

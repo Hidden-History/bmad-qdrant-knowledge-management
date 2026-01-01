@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/Hidden-History/bmad-qdrant-knowledge-management#readme
+    about: Check the documentation before opening an issue
+  - name: Troubleshooting Guide
+    url: https://github.com/Hidden-History/bmad-qdrant-knowledge-management/blob/main/TROUBLESHOOTING.md
+    about: Common issues and solutions
+  - name: BMAD-METHOD
+    url: https://github.com/bmad-code-org/BMAD-METHOD
+    about: Learn about the BMAD methodology
