@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Hidden-History/bmad-qdrant-knowledge-management/actions/workflows/ci.yml"><img src="https://github.com/Hidden-History/bmad-qdrant-knowledge-management/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://github.com/bmad-code-org/BMAD-METHOD"><img src="https://img.shields.io/badge/BMAD-v6+-blue.svg" alt="BMAD Compatible"></a>
   <a href="https://github.com/qdrant/mcp-server-qdrant"><img src="https://img.shields.io/badge/Qdrant-MCP-dc4a33.svg" alt="Qdrant MCP"></a>
@@ -52,30 +53,34 @@ Prevent AI from repeating mistakes. Store architectural decisions, agent specs, 
 
 ### Prerequisites
 
-- Python 3.8+
-- Qdrant server (local Docker or Qdrant Cloud)
+- Python 3.9+
+- Docker & Docker Compose (or Qdrant Cloud)
 - Claude Code or Claude Desktop with MCP support
 
 ### Quick Start
 
 ```bash
-# 1. Clone or copy to your project
-git clone https://github.com/your-org/bmad-qdrant-knowledge-management.git
+# 1. Clone or use as template
+git clone https://github.com/Hidden-History/bmad-qdrant-knowledge-management.git
 cd bmad-qdrant-knowledge-management
 
-# 2. Configure environment
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Configure environment
 cp .env.example .env
 # Edit .env with your settings
 
-# 3. Start Qdrant (if using Docker)
-docker run -p 6333:6333 -v qdrant_storage:/qdrant/storage qdrant/qdrant
+# 4. Start Qdrant (one command!)
+docker compose up -d
 
-# 4. Create collections
-pip install qdrant-client
+# 5. Create collections
 python scripts/create_collections.py
 
-# 5. Configure Claude MCP (see below)
+# 6. Configure Claude MCP (see below)
 ```
+
+> **Tip:** Use `docker compose logs -f` to monitor Qdrant, `docker compose down` to stop.
 
 ### Configure Claude MCP
 

@@ -4,22 +4,39 @@
 
 ## TL;DR
 
-1. Start Qdrant: `docker run -p 6333:6333 qdrant/qdrant`
-2. Copy `.env.example` to `.env`
-3. Run: `python scripts/create_collections.py`
-4. Configure Claude MCP settings
-5. Start storing knowledge!
+1. Install: `pip install -r requirements.txt`
+2. Start Qdrant: `docker compose up -d`
+3. Copy `.env.example` to `.env`
+4. Run: `python scripts/create_collections.py`
+5. Configure Claude MCP settings
+6. Start storing knowledge!
 
 ## Prerequisites Checklist
 
-- [ ] Docker installed (or Qdrant Cloud account)
-- [ ] Python 3.8+
+- [ ] Docker & Docker Compose installed (or Qdrant Cloud account)
+- [ ] Python 3.9+
 - [ ] Claude Code or Claude Desktop
 - [ ] pip (Python package manager)
 
 ## Step 1: Start Qdrant (2 minutes)
 
-### Option A: Local Docker (Recommended for Development)
+### Option A: Docker Compose (Recommended)
+
+```bash
+# Start Qdrant with persistent storage (one command!)
+docker compose up -d
+
+# Verify it's running
+curl http://localhost:6333/health
+
+# View logs if needed
+docker compose logs -f
+
+# Stop when done
+docker compose down
+```
+
+### Option B: Docker Run (Alternative)
 
 ```bash
 # Start Qdrant with persistent storage
@@ -33,7 +50,7 @@ docker run -d \
 curl http://localhost:6333/health
 ```
 
-### Option B: Qdrant Cloud (Recommended for Production)
+### Option C: Qdrant Cloud (Recommended for Production)
 
 1. Create account at [cloud.qdrant.io](https://cloud.qdrant.io)
 2. Create a new cluster
@@ -58,11 +75,11 @@ Key settings to review:
 ## Step 3: Install Dependencies (1 minute)
 
 ```bash
-# Install qdrant-client
-pip install qdrant-client
+# Install all required dependencies
+pip install -r requirements.txt
 
-# Optional: Install python-dotenv for .env loading
-pip install python-dotenv
+# For development (includes testing tools)
+pip install -r requirements-dev.txt
 ```
 
 ## Step 4: Create Collections (1 minute)
