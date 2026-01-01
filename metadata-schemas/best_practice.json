@@ -1,0 +1,389 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Best Practice Metadata Schema",
+  "description": "Metadata schema for agent-discovered best practices",
+  "type": "object",
+  "required": [
+    "unique_id",
+    "type",
+    "domain",
+    "technology",
+    "category",
+    "component",
+    "importance",
+    "created_at",
+    "discovered_by"
+  ],
+  "properties": {
+    "unique_id": {
+      "type": "string",
+      "pattern": "^bp-[a-z0-9-]+$",
+      "description": "Format: bp-{technology}-{topic}-{YYYY-MM-DD}",
+      "examples": ["bp-postgres-connection-pooling-2024-12-28", "bp-qdrant-batch-upsert-2024-12-28"]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 hash of content for deduplication"
+    },
+    "type": {
+      "type": "string",
+      "const": "best_practice",
+      "description": "Must be 'best_practice'"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "database",
+        "infrastructure",
+        "machine_learning",
+        "nlp",
+        "api",
+        "security",
+        "performance",
+        "testing",
+        "deployment",
+        "monitoring",
+        "data_processing",
+        "vector_search",
+        "document_processing",
+        "graph_database"
+      ],
+      "description": "Technical domain of this best practice"
+    },
+    "technology": {
+      "type": "string",
+      "description": "Specific technology this applies to",
+      "examples": ["postgresql", "qdrant", "neo4j", "docker", "python", "fastapi", "tesseract"]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "performance",
+        "security",
+        "scalability",
+        "maintainability",
+        "reliability",
+        "cost_optimization",
+        "code_quality",
+        "architecture",
+        "configuration",
+        "error_handling"
+      ],
+      "description": "Category of best practice"
+    },
+    "component": {
+      "type": "string",
+      "enum": [
+        "qdrant",
+        "postgres",
+        "neo4j",
+        "redis",
+        "agents",
+        "docker",
+        "api",
+        "dashboard",
+        "infrastructure",
+        "general"
+      ],
+      "description": "System component this applies to"
+    },
+    "sub_component": {
+      "type": "string",
+      "description": "Specific subcomponent if applicable",
+      "examples": ["connection_pool", "batch_operations", "indexing"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when best practice was discovered and stored"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of most recent update"
+    },
+    "deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this best practice is outdated"
+    },
+    "superseded_by": {
+      "type": "string",
+      "description": "unique_id of newer best practice"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version of this best practice"
+    },
+    "replaces": {
+      "type": "string",
+      "description": "Previous version unique_id"
+    },
+    "importance": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Importance level of this best practice"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence in this best practice (0.0-1.0)"
+    },
+    "discovered_by": {
+      "type": "string",
+      "pattern": "^agent_[0-9]{2}[a-z]?$",
+      "description": "Agent that discovered this best practice",
+      "examples": ["agent_15", "agent_03", "agent_12"]
+    },
+    "discovery_context": {
+      "type": "string",
+      "description": "What the agent was researching when they found this",
+      "examples": [
+        "Researching Qdrant batch operations for Agent 15 storage routing",
+        "Investigating PostgreSQL connection pooling for database performance"
+      ]
+    },
+    "story_id": {
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+$",
+      "description": "Story during which this was discovered",
+      "examples": ["2-17", "1-3"]
+    },
+    "epic_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "description": "Epic during which this was discovered"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "official_documentation",
+        "research_paper",
+        "blog_post",
+        "stackoverflow",
+        "github_issue",
+        "conference_talk",
+        "book",
+        "vendor_recommendation",
+        "community_forum",
+        "benchmark_study"
+      ],
+      "description": "Type of source where best practice was found"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL where best practice was found"
+    },
+    "source_title": {
+      "type": "string",
+      "description": "Title of the source document/page"
+    },
+    "source_author": {
+      "type": "string",
+      "description": "Author of the source (if known)"
+    },
+    "source_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Publication date of source"
+    },
+    "applicability": {
+      "type": "string",
+      "enum": ["universal", "project_specific", "version_specific", "conditional"],
+      "description": "How broadly this best practice applies"
+    },
+    "applicable_versions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Versions of technology this applies to",
+      "examples": [["PostgreSQL 14+", "PostgreSQL 15", "PostgreSQL 16"]]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Conditions under which this best practice applies",
+      "examples": [["High concurrency (>100 connections)", "Large dataset (>1M vectors)"]]
+    },
+    "implementation_complexity": {
+      "type": "string",
+      "enum": ["trivial", "simple", "moderate", "complex", "expert"],
+      "description": "How difficult to implement"
+    },
+    "estimated_effort": {
+      "type": "string",
+      "description": "Time estimate to implement",
+      "examples": ["15 minutes", "2 hours", "1 day"]
+    },
+    "performance_impact": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "examples": ["latency", "throughput", "memory", "cpu"]
+        },
+        "improvement": {
+          "type": "string",
+          "examples": ["50% faster", "2x throughput", "30% less memory"]
+        },
+        "baseline": {
+          "type": "string"
+        },
+        "optimized": {
+          "type": "string"
+        }
+      },
+      "description": "Quantified performance impact if applicable"
+    },
+    "trade_offs": {
+      "type": "object",
+      "properties": {
+        "pros": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Advantages and disadvantages of this approach"
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative approaches considered"
+    },
+    "anti_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What NOT to do (common mistakes)"
+    },
+    "code_example": {
+      "type": "string",
+      "description": "Working code example demonstrating the best practice"
+    },
+    "code_language": {
+      "type": "string",
+      "enum": ["python", "sql", "yaml", "json", "shell", "javascript", "typescript"],
+      "description": "Programming language of code example"
+    },
+    "configuration_example": {
+      "type": "object",
+      "description": "Configuration example if applicable"
+    },
+    "testing_approach": {
+      "type": "string",
+      "description": "How to test/verify this best practice"
+    },
+    "validation_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "How to validate this is working correctly",
+      "examples": [["Connection pool size stays below max", "Query latency < 100ms"]]
+    },
+    "monitoring_recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What metrics to monitor",
+      "examples": [["Track connection pool utilization", "Monitor query latency p95"]]
+    },
+    "related_practices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "unique_ids of related best practices"
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What needs to be in place before implementing",
+      "examples": [["PostgreSQL 14 or higher", "pgBouncer installed"]]
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "maxItems": 15,
+      "description": "Key terms for search"
+    },
+    "related_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related knowledge entries from legal-ai-knowledge collection"
+    },
+    "search_intent": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Search queries that should find this",
+      "examples": [["postgres connection pooling", "database performance optimization"]]
+    },
+    "industry_adoption": {
+      "type": "string",
+      "enum": ["experimental", "emerging", "mainstream", "standard", "legacy"],
+      "description": "How widely adopted this practice is"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Risk of implementing this practice"
+    },
+    "reversibility": {
+      "type": "string",
+      "enum": ["easily_reversible", "reversible_with_effort", "difficult_to_reverse", "irreversible"],
+      "description": "How easy to undo if it doesn't work"
+    },
+    "production_ready": {
+      "type": "boolean",
+      "description": "Whether this is ready for production use"
+    },
+    "applied_in_project": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether we've actually implemented this in our project"
+    },
+    "application_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When we implemented this in our project"
+    },
+    "application_story": {
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+$",
+      "description": "Story where we implemented this"
+    },
+    "results_observed": {
+      "type": "string",
+      "description": "Actual results we observed after implementing"
+    }
+  },
+  "additionalProperties": false
+}

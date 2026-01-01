@@ -1,0 +1,316 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Database Schema Metadata Schema",
+  "description": "Metadata schema for database schema knowledge entries",
+  "type": "object",
+  "required": [
+    "unique_id",
+    "type",
+    "table_name",
+    "database",
+    "component",
+    "importance",
+    "created_at"
+  ],
+  "properties": {
+    "unique_id": {
+      "type": "string",
+      "pattern": "^schema-[a-z_]+-[a-z]+$",
+      "description": "Format: schema-{table_name}-{database}",
+      "examples": ["schema-chunks-postgres", "schema-citations-neo4j"]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 hash of content for deduplication"
+    },
+    "type": {
+      "type": "string",
+      "const": "database_schema",
+      "description": "Must be 'database_schema'"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "Name of the table or collection",
+      "examples": ["chunks", "books", "citations", "legal_domains"]
+    },
+    "database": {
+      "type": "string",
+      "enum": ["postgresql", "neo4j", "qdrant", "redis"],
+      "description": "Database system"
+    },
+    "component": {
+      "type": "string",
+      "enum": ["postgres", "neo4j", "qdrant", "redis"],
+      "description": "Database component"
+    },
+    "database_name": {
+      "type": "string",
+      "description": "Specific database instance name",
+      "examples": ["legal_ai_system", "legal_graph", "legal_vectors"]
+    },
+    "schema_name": {
+      "type": "string",
+      "description": "Schema name (for PostgreSQL)",
+      "examples": ["public", "metadata", "audit"]
+    },
+    "epic_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "description": "Epic where schema was created"
+    },
+    "story_id": {
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+$",
+      "description": "Story where schema was created"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when schema was created"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of most recent schema change"
+    },
+    "deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this table is deprecated"
+    },
+    "superseded_by": {
+      "type": "string",
+      "description": "unique_id of replacement schema"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema version"
+    },
+    "replaces": {
+      "type": "string",
+      "description": "Previous schema version unique_id"
+    },
+    "breaking_change": {
+      "type": "boolean",
+      "description": "Does this schema change break compatibility?"
+    },
+    "importance": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Importance of this schema"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence in schema documentation accuracy"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "migration",
+        "documentation",
+        "code_inspection",
+        "database_dump"
+      ],
+      "description": "Source of schema information"
+    },
+    "migration_file": {
+      "type": "string",
+      "description": "Migration file that created this schema",
+      "examples": ["migrations/024_database_routing_log.sql"]
+    },
+    "migration_number": {
+      "type": "string",
+      "pattern": "^[0-9]{3}$",
+      "description": "Migration number",
+      "examples": ["024", "005"]
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "nullable": {
+            "type": "boolean"
+          },
+          "default": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "type"]
+      },
+      "description": "Table columns (PostgreSQL) or fields (Neo4j/Qdrant)"
+    },
+    "primary_key": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Primary key columns"
+    },
+    "foreign_keys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "string"
+          },
+          "references_table": {
+            "type": "string"
+          },
+          "references_column": {
+            "type": "string"
+          },
+          "on_delete": {
+            "type": "string",
+            "enum": ["CASCADE", "SET NULL", "RESTRICT", "NO ACTION"]
+          }
+        }
+      },
+      "description": "Foreign key constraints"
+    },
+    "indexes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "unique": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["btree", "hash", "gin", "gist", "brin"]
+          }
+        }
+      },
+      "description": "Database indexes"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["check", "unique", "exclusion"]
+          },
+          "definition": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Table constraints"
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "timing": {
+            "type": "string",
+            "enum": ["BEFORE", "AFTER", "INSTEAD OF"]
+          },
+          "event": {
+            "type": "string",
+            "enum": ["INSERT", "UPDATE", "DELETE"]
+          },
+          "function": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Database triggers"
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related tables this schema depends on or references"
+    },
+    "access_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Common query patterns for this table"
+    },
+    "performance_notes": {
+      "type": "string",
+      "description": "Performance characteristics and optimization notes"
+    },
+    "data_volume": {
+      "type": "string",
+      "description": "Expected data volume",
+      "examples": ["millions of rows", "hundreds of entries", "bounded by book count"]
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "maxItems": 15,
+      "description": "Key terms for search"
+    },
+    "related_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related knowledge entries"
+    },
+    "search_intent": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Search queries that should find this"
+    },
+    "usage_by_agents": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^agent_[0-9]{2}[a-z]?$"
+      },
+      "description": "Which agents use this table"
+    },
+    "backup_strategy": {
+      "type": "string",
+      "description": "How this table is backed up"
+    },
+    "partition_strategy": {
+      "type": "string",
+      "description": "Partitioning approach if applicable"
+    }
+  },
+  "additionalProperties": false
+}

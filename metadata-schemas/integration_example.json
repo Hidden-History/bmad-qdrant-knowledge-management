@@ -1,0 +1,254 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Integration Example Metadata Schema",
+  "description": "Metadata schema for integration example knowledge entries",
+  "type": "object",
+  "required": [
+    "unique_id",
+    "type",
+    "component",
+    "importance",
+    "created_at"
+  ],
+  "properties": {
+    "unique_id": {
+      "type": "string",
+      "pattern": "^integration-[a-z0-9-]+$",
+      "description": "Format: integration-{description}",
+      "examples": ["integration-agent15-qdrant-routing", "integration-postgres-neo4j-sync"]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 hash of content for deduplication"
+    },
+    "type": {
+      "type": "string",
+      "const": "integration_example",
+      "description": "Must be 'integration_example'"
+    },
+    "component": {
+      "type": "string",
+      "enum": [
+        "qdrant",
+        "postgres",
+        "neo4j",
+        "redis",
+        "agents",
+        "api",
+        "cross-component"
+      ],
+      "description": "Primary component in integration"
+    },
+    "sub_component": {
+      "type": "string",
+      "description": "Specific subcomponent or agent"
+    },
+    "integration_type": {
+      "type": "string",
+      "enum": [
+        "agent_to_database",
+        "database_to_database",
+        "agent_to_agent",
+        "api_to_database",
+        "service_to_service"
+      ],
+      "description": "Type of integration"
+    },
+    "components_integrated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "description": "All components involved in this integration",
+      "examples": [["agent_15", "qdrant_tiers", "postgres_routing_log"]]
+    },
+    "epic_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "description": "Epic where integration was implemented"
+    },
+    "story_id": {
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+$",
+      "description": "Story where integration was implemented"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when example was documented"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of most recent update"
+    },
+    "deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this integration pattern is deprecated"
+    },
+    "superseded_by": {
+      "type": "string",
+      "description": "unique_id of replacement integration pattern"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version of this integration"
+    },
+    "replaces": {
+      "type": "string",
+      "description": "Previous version unique_id"
+    },
+    "breaking_change": {
+      "type": "boolean",
+      "description": "Does this integration change break compatibility?"
+    },
+    "importance": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Importance of this integration pattern"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence in integration best practice"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "implementation",
+        "code_review",
+        "testing",
+        "documentation"
+      ],
+      "description": "Source of this integration example"
+    },
+    "use_case": {
+      "type": "string",
+      "description": "What problem this integration solves"
+    },
+    "data_flow": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Step-by-step data flow through components",
+      "examples": [["Agent 03 classifies", "Agent 15 routes", "Qdrant stores", "Postgres logs"]]
+    },
+    "code_example": {
+      "type": "string",
+      "description": "Working code example of integration"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["python", "sql", "javascript", "shell", "yaml"],
+      "description": "Programming language of example"
+    },
+    "error_handling": {
+      "type": "string",
+      "description": "How this integration handles errors"
+    },
+    "retry_logic": {
+      "type": "string",
+      "description": "Retry strategy if applicable"
+    },
+    "transaction_handling": {
+      "type": "string",
+      "description": "How transactions are managed across components"
+    },
+    "performance_characteristics": {
+      "type": "object",
+      "properties": {
+        "latency": {
+          "type": "string"
+        },
+        "throughput": {
+          "type": "string"
+        },
+        "resource_usage": {
+          "type": "string"
+        }
+      },
+      "description": "Performance metrics"
+    },
+    "scalability": {
+      "type": "string",
+      "description": "How this integration scales"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Required dependencies or prerequisites"
+    },
+    "configuration_required": {
+      "type": "object",
+      "description": "Required configuration for this integration"
+    },
+    "testing_approach": {
+      "type": "string",
+      "description": "How to test this integration"
+    },
+    "test_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Test file paths"
+    },
+    "common_pitfalls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Common mistakes when implementing this integration"
+    },
+    "best_practices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Recommended approaches for this integration"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "maxItems": 15,
+      "description": "Key terms for search"
+    },
+    "related_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related knowledge entries"
+    },
+    "search_intent": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Search queries that should find this"
+    },
+    "monitoring": {
+      "type": "string",
+      "description": "How to monitor this integration"
+    },
+    "troubleshooting": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Common troubleshooting steps"
+    }
+  },
+  "additionalProperties": false
+}
