@@ -92,7 +92,7 @@ jobs:
 
       - name: Health check
         run: |
-          curl -f http://localhost:6333/health || exit 1
+          curl -f http://localhost:6333/ || exit 1
           echo "Qdrant is healthy!"
 
       - name: Stop services
