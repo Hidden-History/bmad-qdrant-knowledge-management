@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-01-01
+
+### Fixed
+
+- Fixed Qdrant health check endpoint in CI (`/` instead of `/health`)
+- Fixed ruff linting configuration to use `[tool.ruff.lint]` section
+- Relaxed linting rules for example scripts (F401 unused imports, F541 f-strings)
+- Fixed test runner to use `run_all_tests.sh` instead of pytest
+
 ## [1.1.0] - 2026-01-01
 
 ### Added
@@ -66,5 +75,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - No credentials stored in repository
 - Environment variable configuration
 
+[1.1.1]: https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases/tag/v1.1.1
 [1.1.0]: https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases/tag/v1.0.0
