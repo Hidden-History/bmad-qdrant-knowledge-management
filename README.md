@@ -13,7 +13,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://github.com/bmad-code-org/BMAD-METHOD"><img src="https://img.shields.io/badge/BMAD-v6+-blue.svg" alt="BMAD Compatible"></a>
   <a href="https://github.com/qdrant/mcp-server-qdrant"><img src="https://img.shields.io/badge/Qdrant-MCP-dc4a33.svg" alt="Qdrant MCP"></a>
-  <a href="https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases"><img src="https://img.shields.io/badge/version-1.2.0-green.svg" alt="Version"></a>
+  <a href="https://github.com/Hidden-History/bmad-qdrant-knowledge-management/releases"><img src="https://img.shields.io/badge/version-1.2.1-green.svg" alt="Version"></a>
 </p>
 
 ## TL;DR
