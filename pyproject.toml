@@ -1,6 +1,6 @@
 [project]
 name = "bmad-qdrant-knowledge-management"
-version = "1.1.1"
+version = "1.2.0"
 description = "Institutional memory system for AI-assisted development using Qdrant vector database"
 readme = "README.md"
 license = {text = "MIT"}
