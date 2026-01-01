@@ -26,10 +26,50 @@ Prevent AI from repeating mistakes. Store architectural decisions, agent specs, 
 - Losing architectural knowledge when context resets
 - No continuity between development sessions
 
+---
+
+## 🎯 About This Template
+
+**This is a real system I use daily** for my own large-scale development projects. After seeing how much it improved my AI-assisted workflow, I've packaged it as a template so others can benefit too.
+
+### Why I Built This
+
+When working on complex projects with AI assistants (Claude, GPT, etc.), I kept running into the same problems:
+- AI would forget architectural decisions from previous sessions
+- Same bugs got solved multiple times
+- Context window limits meant constantly re-explaining the project
+
+This knowledge management system solved all of that. Now my AI assistants have persistent memory across sessions.
+
+### How to Use This Template
+
+1. **Click "Use this template"** on GitHub to create your own copy
+2. **Customize for your project:**
+   - Update `.env` with your collection names
+   - Modify metadata schemas if needed
+   - Add your own knowledge types
+3. **Start storing knowledge** - architectural decisions, error patterns, agent specs
+
+### What You Might Change
+
+| Aspect | Default | Your Customization |
+|--------|---------|-------------------|
+| Collection names | `bmad-knowledge` | `yourproject-knowledge` |
+| `group_id` | `demo_project` | `your_project_name` |
+| Knowledge types | 8 types | Add/remove as needed |
+| Metadata fields | BMAD-focused | Your workflow fields |
+
+### This is NOT a Library
+
+This is a **starter template**, not a package you install. Fork it, modify it, make it yours. The code is intentionally simple so you can understand and adapt it.
+
+---
+
 ## Quick Links
 
 | I want to... | Go to |
 |--------------|-------|
+| Understand this template | [About This Template](#-about-this-template) |
 | Get started in 15 minutes | [QUICKSTART.md](QUICKSTART.md) |
 | Configure for my project | [CONFIGURATION.md](CONFIGURATION.md) |
 | Understand Qdrant & vectors | [Understanding Qdrant](#-understanding-qdrant-your-ais-persistent-memory) |
