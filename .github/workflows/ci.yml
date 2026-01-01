@@ -43,7 +43,7 @@ jobs:
       - name: Run tests
         run: |
           cd validation
-          pytest -v --tb=short
+          bash run_all_tests.sh
 
   validate-schemas:
     runs-on: ubuntu-latest
