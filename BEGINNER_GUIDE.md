@@ -1158,5 +1158,5 @@ Before deploying, verify:
 
 ---
 
-*Guide Version: 1.0 | Last Updated: January 2025*
+*Guide Version: 1.0 | Last Updated: January 2026*
 *Compatible with: Qdrant 1.11+, Python 3.8+, BMAD Method v6*
