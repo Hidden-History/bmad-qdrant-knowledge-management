@@ -26,6 +26,8 @@ Prevent AI from repeating mistakes. Store architectural decisions, agent specs, 
 - Losing architectural knowledge when context resets
 - No continuity between development sessions
 
+📚 **New to vector databases?** We've included a [complete beginner's guide](BEGINNER_GUIDE.md) that walks through every concept step-by-step.
+
 ---
 
 ## 🎯 About This Template
@@ -69,6 +71,7 @@ This is a **starter template**, not a package you install. Fork it, modify it, m
 
 | I want to... | Go to |
 |--------------|-------|
+| **Start from zero with Qdrant** | **[BEGINNER_GUIDE.md](BEGINNER_GUIDE.md)** ⭐ |
 | Understand this template | [About This Template](#-about-this-template) |
 | Get started in 15 minutes | [QUICKSTART.md](QUICKSTART.md) |
 | Configure for my project | [CONFIGURATION.md](CONFIGURATION.md) |
@@ -96,6 +99,8 @@ This is a **starter template**, not a package you install. Fork it, modify it, m
 - Python 3.9+
 - Docker & Docker Compose (or Qdrant Cloud)
 - Claude Code or Claude Desktop with MCP support
+
+> **👋 New to Qdrant or vector databases?** Check out our comprehensive [Beginner's Guide](BEGINNER_GUIDE.md) for a step-by-step tutorial covering every concept from scratch.
 
 ### Quick Start
 
@@ -196,6 +201,7 @@ mcp__qdrant__qdrant-store(
 ```
 bmad-qdrant-knowledge-management/
 ├── README.md                    # This file
+├── BEGINNER_GUIDE.md           # Complete tutorial for Qdrant newcomers ⭐
 ├── QUICKSTART.md               # 15-minute setup guide
 ├── CONFIGURATION.md            # Configuration options
 ├── ARCHITECTURE.md             # System design
